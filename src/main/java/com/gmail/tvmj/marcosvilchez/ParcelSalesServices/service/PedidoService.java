@@ -27,14 +27,15 @@ public class PedidoService {
         return repo.findById(idPedido).orElseThrow(() -> new RuntimeException("pedido no encontrado"));
     }
 
+
+    //use el key del map para registrar la cantidad de cada producto
     public Pedido addList(Pedido pedido, Producto product){
         if(pedido.getProductos().containsKey(product)){
             pedido.getProductos().put(product,pedido.getProductos().get(product)+1);
         }else{
             pedido.getProductos().put(product,1);
         }
-        repo.save(pedido);
-        return pedido;
+        return repo.save(pedido);
     }
 
     public Pedido deleteElementList(Pedido pedido, Producto product){
@@ -46,7 +47,26 @@ public class PedidoService {
                 pedido.getProductos().put(product, pedido.getProductos().get(product) - 1);
             }
         }
-        repo.save(pedido);
-        return pedido;
+        return repo.save(pedido);
+    }
+
+    public Pedido sumPrice(Pedido order, Producto product){
+        double cost = order.getPrice();
+        double sum = product.getPrice();
+        cost = cost + sum;
+        order.setPrice(cost);
+        return repo.save(order);
+    }
+
+    public Pedido subPrice(Pedido order, Producto product){
+        double cost = order.getPrice();
+        double subt = product.getPrice();
+        if (order.getProductos().containsKey(product)){
+            System.out.println("entra");
+            cost = cost - subt;
+
+        }
+        order.setPrice(cost);
+        return repo.save(order);
     }
 }

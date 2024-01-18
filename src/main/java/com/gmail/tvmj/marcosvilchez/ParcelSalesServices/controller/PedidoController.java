@@ -45,11 +45,13 @@ public class PedidoController {
         return model.toModel(order);
     }
 
+
     @PutMapping("/{idPedido}/{idProducto}")
     ResponseEntity<?> addProduct(@PathVariable Integer idProducto, @PathVariable Integer idPedido){
         Pedido order = pedService.findOne(idPedido);
         Producto product = proService.findProduct(idProducto);
         pedService.addList(order, product);
+        pedService.sumPrice(order, product);
         EntityModel<Pedido> entityModel = model.toModel(order);
         return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
     }
@@ -58,6 +60,7 @@ public class PedidoController {
     ResponseEntity<?> deleteElemetList(@PathVariable Integer idProducto, @PathVariable Integer idPedido){
         Pedido order = pedService.findOne(idPedido);
         Producto product = proService.findProduct(idProducto);
+        pedService.subPrice(order, product);
         pedService.deleteElementList(order,product);
         EntityModel<Pedido> entityModel = model.toModel(order);
         return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
