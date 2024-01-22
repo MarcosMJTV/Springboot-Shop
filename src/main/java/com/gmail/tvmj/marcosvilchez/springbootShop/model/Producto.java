@@ -1,5 +1,6 @@
-package com.gmail.tvmj.marcosvilchez.ParcelSalesServices.model;
+package com.gmail.tvmj.marcosvilchez.springbootShop.model;
 
+import com.gmail.tvmj.marcosvilchez.springbootShop.controller.StatusProduct;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,11 +16,13 @@ public class Producto {
     private String name;
     private double price;
     private String description;
+    private StatusProduct status;
 
     public Producto(String name, double price, String description){
         this.name = name;
         this.price = price;
         this.description = description;
+        this.status = StatusProduct.AVAILABLE;
     }
 
 }

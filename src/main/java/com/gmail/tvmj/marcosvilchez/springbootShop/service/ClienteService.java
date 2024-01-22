@@ -1,8 +1,8 @@
-package com.gmail.tvmj.marcosvilchez.ParcelSalesServices.service;
+package com.gmail.tvmj.marcosvilchez.springbootShop.service;
 
-import com.gmail.tvmj.marcosvilchez.ParcelSalesServices.exeption.ResourceNotFoundException;
-import com.gmail.tvmj.marcosvilchez.ParcelSalesServices.model.Cliente;
-import com.gmail.tvmj.marcosvilchez.ParcelSalesServices.reporitory.ClienteRepo;
+import com.gmail.tvmj.marcosvilchez.springbootShop.exception.ResourceNotFoundException;
+import com.gmail.tvmj.marcosvilchez.springbootShop.model.Cliente;
+import com.gmail.tvmj.marcosvilchez.springbootShop.reporitory.ClienteRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

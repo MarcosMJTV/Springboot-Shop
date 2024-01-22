@@ -1,13 +1,13 @@
-package com.gmail.tvmj.marcosvilchez.ParcelSalesServices;
+package com.gmail.tvmj.marcosvilchez.springbootShop;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ParcelSalesServicesApplication {
+public class SpringbootShopApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ParcelSalesServicesApplication.class, args);
+		SpringApplication.run(SpringbootShopApplication.class, args);
 	}
 
 }

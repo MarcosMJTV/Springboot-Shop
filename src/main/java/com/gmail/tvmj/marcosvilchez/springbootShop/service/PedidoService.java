@@ -1,13 +1,12 @@
-package com.gmail.tvmj.marcosvilchez.ParcelSalesServices.service;
+package com.gmail.tvmj.marcosvilchez.springbootShop.service;
 
-import com.gmail.tvmj.marcosvilchez.ParcelSalesServices.model.Pedido;
-import com.gmail.tvmj.marcosvilchez.ParcelSalesServices.model.Producto;
-import com.gmail.tvmj.marcosvilchez.ParcelSalesServices.reporitory.PedidoRepo;
+import com.gmail.tvmj.marcosvilchez.springbootShop.controller.StatusOrder;
+import com.gmail.tvmj.marcosvilchez.springbootShop.model.Pedido;
+import com.gmail.tvmj.marcosvilchez.springbootShop.model.Producto;
+import com.gmail.tvmj.marcosvilchez.springbootShop.reporitory.PedidoRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -67,6 +66,15 @@ public class PedidoService {
 
         }
         order.setPrice(cost);
+        return repo.save(order);
+    }
+
+    public void delete(Integer idOrder){
+        repo.deleteById(idOrder);
+    }
+
+    public Pedido upStatus(Pedido order, StatusOrder statusOrder) {
+        order.setStatusOrder(statusOrder);
         return repo.save(order);
     }
 }

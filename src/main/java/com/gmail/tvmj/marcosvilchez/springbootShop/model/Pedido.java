@@ -1,5 +1,6 @@
-package com.gmail.tvmj.marcosvilchez.ParcelSalesServices.model;
+package com.gmail.tvmj.marcosvilchez.springbootShop.model;
 
+import com.gmail.tvmj.marcosvilchez.springbootShop.controller.StatusOrder;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,7 +29,10 @@ public class Pedido {
 
     private @NonNull double price;
 
+    private StatusOrder statusOrder;
+
     public Pedido(Cliente client){
         this.client = client;
+        this.statusOrder = StatusOrder.PENDING;
     }
 }

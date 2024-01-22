@@ -1,4 +1,4 @@
-package com.gmail.tvmj.marcosvilchez.ParcelSalesServices.model;
+package com.gmail.tvmj.marcosvilchez.springbootShop.model;
 
 import jakarta.persistence.*;
 import lombok.*;

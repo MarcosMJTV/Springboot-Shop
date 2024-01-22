@@ -1,8 +1,7 @@
-package com.gmail.tvmj.marcosvilchez.ParcelSalesServices.controller;
+package com.gmail.tvmj.marcosvilchez.springbootShop.controller;
 
-import com.gmail.tvmj.marcosvilchez.ParcelSalesServices.model.Pedido;
+import com.gmail.tvmj.marcosvilchez.springbootShop.model.Pedido;
 import org.springframework.hateoas.EntityModel;
-import org.springframework.hateoas.RepresentationModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
@@ -10,7 +9,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Component
-public class PedidoAssamble implements RepresentationModelAssembler<Pedido, EntityModel<Pedido>> {
+public class PedidoAssemble implements RepresentationModelAssembler<Pedido, EntityModel<Pedido>> {
 
     @Override
     public EntityModel<Pedido> toModel(Pedido entity) {

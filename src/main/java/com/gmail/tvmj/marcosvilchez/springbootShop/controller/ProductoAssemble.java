@@ -1,6 +1,6 @@
-package com.gmail.tvmj.marcosvilchez.ParcelSalesServices.controller;
+package com.gmail.tvmj.marcosvilchez.springbootShop.controller;
 
-import com.gmail.tvmj.marcosvilchez.ParcelSalesServices.model.Producto;
+import com.gmail.tvmj.marcosvilchez.springbootShop.model.Producto;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
@@ -9,7 +9,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Component
-public class ProductoAssamble implements RepresentationModelAssembler<Producto, EntityModel<Producto>> {
+public class ProductoAssemble implements RepresentationModelAssembler<Producto, EntityModel<Producto>> {
     @Override
     public EntityModel<Producto> toModel(Producto entity) {
 

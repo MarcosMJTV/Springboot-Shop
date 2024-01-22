@@ -1,11 +1,11 @@
-package com.gmail.tvmj.marcosvilchez.ParcelSalesServices.controller;
+package com.gmail.tvmj.marcosvilchez.springbootShop.controller;
 
-import com.gmail.tvmj.marcosvilchez.ParcelSalesServices.model.Cliente;
-import com.gmail.tvmj.marcosvilchez.ParcelSalesServices.model.Pedido;
-import com.gmail.tvmj.marcosvilchez.ParcelSalesServices.model.Producto;
-import com.gmail.tvmj.marcosvilchez.ParcelSalesServices.service.ClienteService;
-import com.gmail.tvmj.marcosvilchez.ParcelSalesServices.service.PedidoService;
-import com.gmail.tvmj.marcosvilchez.ParcelSalesServices.service.ProductoService;
+import com.gmail.tvmj.marcosvilchez.springbootShop.model.Cliente;
+import com.gmail.tvmj.marcosvilchez.springbootShop.model.Pedido;
+import com.gmail.tvmj.marcosvilchez.springbootShop.model.Producto;
+import com.gmail.tvmj.marcosvilchez.springbootShop.service.ClienteService;
+import com.gmail.tvmj.marcosvilchez.springbootShop.service.PedidoService;
+import com.gmail.tvmj.marcosvilchez.springbootShop.service.ProductoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -21,7 +21,7 @@ public class LoadDatabase {
     @Bean
     CommandLineRunner initDatabase(ClienteService repoCli, ProductoService repoPro, PedidoService repoPed){
         return args ->{
-/*
+
             Cliente cliente1= new Cliente("marcos","vilchez", "argentina", "Marcosvilchez.tvmj@gmail.com", "2004");
             Cliente cliente2= new Cliente("Alex","Johnson", "Estados Unidos", "alex.johnson@email.com", "Pass123");
             Cliente cliente3= new Cliente("Maria","Rodriguez", "México", "maria.rodriguez@email.com", "SecurePass456");
@@ -70,7 +70,7 @@ public class LoadDatabase {
             repoPed.saveOrder(pedido4);
             repoPed.saveOrder(pedido5);
             repoPed.saveOrder(pedido1);
-*/
+
         };
     }
 }

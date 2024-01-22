@@ -1,4 +1,4 @@
-package com.gmail.tvmj.marcosvilchez.ParcelSalesServices.exeption;
+package com.gmail.tvmj.marcosvilchez.springbootShop.exception;
 
 public class ResourceNotFoundException extends RuntimeException{
 

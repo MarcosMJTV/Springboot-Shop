@@ -1,13 +1,11 @@
-package com.gmail.tvmj.marcosvilchez.ParcelSalesServices.controller;
+package com.gmail.tvmj.marcosvilchez.springbootShop.controller;
 
-import com.gmail.tvmj.marcosvilchez.ParcelSalesServices.model.Cliente;
-import com.gmail.tvmj.marcosvilchez.ParcelSalesServices.model.Producto;
-import com.gmail.tvmj.marcosvilchez.ParcelSalesServices.service.ClienteService;
+import com.gmail.tvmj.marcosvilchez.springbootShop.model.Cliente;
+import com.gmail.tvmj.marcosvilchez.springbootShop.service.ClienteService;
 import lombok.AllArgsConstructor;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +20,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @RequestMapping("/api")
 public class ClienteController {
     private final ClienteService service;
-    private final ClienteAssamble model;
+    private final ClienteAssemble model;
 
     @PostMapping("/cliente")
     ResponseEntity<?> newClient(@RequestBody Cliente client){
