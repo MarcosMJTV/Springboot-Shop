@@ -38,7 +38,7 @@ public class ClienteService {
             cliente.setPassword(clientOld.getPassword());
             return repo.save(cliente);
         }).orElseGet(() -> {
-            clientOld.setIdClient(id);
+            clientOld.setIdUser(id);
             return repo.save(clientOld);
         });
         return client;

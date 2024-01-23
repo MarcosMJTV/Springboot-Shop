@@ -13,7 +13,7 @@ public class ClienteAssemble implements RepresentationModelAssembler<Cliente, En
     @Override
     public EntityModel<Cliente> toModel(Cliente entity) {
         return EntityModel.of(entity,
-                linkTo(methodOn(ClienteController.class).findOne(entity.getIdClient())).withSelfRel(),
+                linkTo(methodOn(ClienteController.class).findOne(entity.getIdUser())).withSelfRel(),
                 linkTo(methodOn(ClienteController.class).findAll()).withRel("clientes"));
     }
 }
