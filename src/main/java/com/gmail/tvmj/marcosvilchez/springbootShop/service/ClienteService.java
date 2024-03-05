@@ -2,7 +2,10 @@ package com.gmail.tvmj.marcosvilchez.springbootShop.service;
 
 import com.gmail.tvmj.marcosvilchez.springbootShop.exception.ResourceNotFoundException;
 import com.gmail.tvmj.marcosvilchez.springbootShop.model.Cliente;
+import com.gmail.tvmj.marcosvilchez.springbootShop.model.User;
 import com.gmail.tvmj.marcosvilchez.springbootShop.reporitory.ClienteRepo;
+import com.gmail.tvmj.marcosvilchez.springbootShop.reporitory.UserRepo;
+import com.gmail.tvmj.marcosvilchez.springbootShop.util.Role;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ClienteService {
     private final ClienteRepo repo;
+    private final UserRepo uRepo;
 
     public Cliente saveClient(Cliente client){
         return repo.save(client);

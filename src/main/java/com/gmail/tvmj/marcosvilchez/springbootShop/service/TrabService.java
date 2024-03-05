@@ -2,7 +2,10 @@ package com.gmail.tvmj.marcosvilchez.springbootShop.service;
 
 import com.gmail.tvmj.marcosvilchez.springbootShop.exception.ResourceNotFoundException;
 import com.gmail.tvmj.marcosvilchez.springbootShop.model.Trabajador;
+import com.gmail.tvmj.marcosvilchez.springbootShop.model.User;
 import com.gmail.tvmj.marcosvilchez.springbootShop.reporitory.TrabajadorRepo;
+import com.gmail.tvmj.marcosvilchez.springbootShop.reporitory.UserRepo;
+import com.gmail.tvmj.marcosvilchez.springbootShop.util.Role;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +16,12 @@ import java.util.List;
 public class TrabService {
 
     private TrabajadorRepo repo;
+    private UserRepo uRepo;
 
-    public Trabajador save (Trabajador worker){
+    public Trabajador saveWorker (Trabajador worker){
+        /*User user = new User(worker.getFirstname(), worker.getLastname(), worker.getUsername(), worker.getPassword(),
+                worker.getRol());
+        uRepo.save(user);*/
         return repo.save(worker);
     }
 
@@ -45,4 +52,6 @@ public class TrabService {
         });
         return worker;
     }
+
+
 }

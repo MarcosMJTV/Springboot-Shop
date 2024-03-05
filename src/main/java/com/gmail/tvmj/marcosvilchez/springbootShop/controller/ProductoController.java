@@ -29,39 +29,39 @@ public class ProductoController {
     private ProductoAssemble model;
 
     @PostMapping("/nuevo")
-    ResponseEntity<?> newProducto(@RequestBody Producto product){
+    public ResponseEntity<?> newProducto(@RequestBody Producto product){
         EntityModel<Producto> newProduct = model.toModel(proService.saveProduct(product));
         return ResponseEntity.created(newProduct.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(newProduct);
     }
 
     @GetMapping("/productos")
-    CollectionModel<EntityModel<Producto>> findAll(){
+    public CollectionModel<EntityModel<Producto>> findAll(){
         List<EntityModel<Producto>> products = proService.findAll().stream().map(model::toModel).collect(Collectors.toList());
         return CollectionModel.of(products, linkTo(methodOn(ProductoController.class).findAll()).withSelfRel());
     }
 
     @GetMapping("/{idProducto}")
-    EntityModel<Producto> findOne(@PathVariable Integer idProducto){
+    public EntityModel<Producto> findOne(@PathVariable Integer idProducto){
         Producto product = proService.findProduct(idProducto);
         return model.toModel(product);
     }
 
 
     @PutMapping("/actualizar/{idProducto}")
-    ResponseEntity<?> updateProduct(@RequestBody Producto producto, @PathVariable Integer idProducto){
+    public ResponseEntity<?> updateProduct(@RequestBody Producto producto, @PathVariable Integer idProducto){
         Producto product = proService.updateProduct(producto, idProducto);
         EntityModel<Producto> entityModel = model.toModel(product);
         return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
     }
 
     @DeleteMapping("/borar/{idProducto}")
-    ResponseEntity<?> deleteProduct(@PathVariable Integer idProducto){
+    public ResponseEntity<?> deleteProduct(@PathVariable Integer idProducto){
         proService.delete(idProducto);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/descontinuado/{idProducto}")
-    ResponseEntity<?> discontinued(@PathVariable Integer idProducto){
+    public ResponseEntity<?> discontinued(@PathVariable Integer idProducto){
         Producto product = proService.findProduct(idProducto);
         if(product.getStatus() == StatusProduct.AVAILABLE | product.getStatus() == StatusProduct.OUT_OF_STOCK){
             proService.updateStatus(product, StatusProduct.DISCONTINUED);
@@ -72,7 +72,7 @@ public class ProductoController {
     }
 
     @PutMapping("/sinStock/{idProducto}")
-    ResponseEntity<?> nullStock(@PathVariable Integer idProducto){
+    public ResponseEntity<?> nullStock(@PathVariable Integer idProducto){
         Producto product = proService.findProduct(idProducto);
         if(product.getStatus() == StatusProduct.AVAILABLE ){
             proService.updateStatus(product, StatusProduct.OUT_OF_STOCK);
@@ -83,7 +83,7 @@ public class ProductoController {
     }
 
     @PutMapping("/disponible/{idProducto}")
-    ResponseEntity<?> avialable(@PathVariable Integer idProducto){
+    public ResponseEntity<?> avialable(@PathVariable Integer idProducto){
         Producto product = proService.findProduct(idProducto);
         if(product.getStatus() == StatusProduct.OUT_OF_STOCK |  product.getStatus() == StatusProduct.DISCONTINUED){
             proService.updateStatus(product, StatusProduct.AVAILABLE);

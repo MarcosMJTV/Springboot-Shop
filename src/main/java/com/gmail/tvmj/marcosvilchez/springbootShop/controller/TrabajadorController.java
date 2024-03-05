@@ -25,31 +25,31 @@ public class TrabajadorController {
     private TrabajadorAssemble model;
 
     @PostMapping("/nuevo")
-    ResponseEntity<?> newWorker(@RequestBody Trabajador worker){
-        EntityModel<Trabajador> newWorker = model.toModel(trabService.save(worker));
+    public ResponseEntity<?> newWorker(@RequestBody Trabajador worker){
+        EntityModel<Trabajador> newWorker = model.toModel(trabService.saveWorker(worker));
         return ResponseEntity.created(newWorker.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(newWorker);
     }
 
     @GetMapping("/trabajadores")
-    CollectionModel<EntityModel<Trabajador>> findAll(){
+    public CollectionModel<EntityModel<Trabajador>> findAll(){
         List<EntityModel<Trabajador>> worker = trabService.findAll().stream().map(model::toModel).collect(Collectors.toList());
         return CollectionModel.of(worker, linkTo(methodOn(ClienteController.class).findAll()).withSelfRel());
     }
 
     @GetMapping("/trabajadores/{idTrabajador}")
-    EntityModel<Trabajador> findOne(@PathVariable Integer idTrabajador){
+    public EntityModel<Trabajador> findOne(@PathVariable Integer idTrabajador){
         Trabajador worker = trabService.findOne(idTrabajador);
         return model.toModel(worker);
     }
 
     @DeleteMapping("/trabajador/borrar/{idTrabajador}")
-    ResponseEntity<?> deleteWorker(@PathVariable Integer idTrabajador){
+    public ResponseEntity<?> deleteWorker(@PathVariable Integer idTrabajador){
         trabService.delete(idTrabajador);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/trabajador/actualizar/{idTrabajador}")
-    ResponseEntity<?> update(@RequestBody Trabajador workerOld, @PathVariable Integer idTrabajador){
+    public ResponseEntity<?> update(@RequestBody Trabajador workerOld, @PathVariable Integer idTrabajador){
         Trabajador updateWorker = trabService.update(workerOld, idTrabajador);
         EntityModel<Trabajador> entityModel = model.toModel(updateWorker);
         return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);

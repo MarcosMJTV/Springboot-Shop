@@ -34,26 +34,26 @@ public class PedidoController {
 
 
     @PostMapping("/pedido")
-    ResponseEntity<?> newOrder(@RequestBody Pedido order){
+    public ResponseEntity<?> newOrder(@RequestBody Pedido order){
         EntityModel<Pedido> neworder = model.toModel(pedService.saveOrder(order));
         return ResponseEntity.created(neworder.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(neworder);
     }
 
     @GetMapping("/pedido")
-    CollectionModel<EntityModel<Pedido>> findAll(){
+    public CollectionModel<EntityModel<Pedido>> findAll(){
         List<EntityModel<Pedido>> pedidos = pedService.findAll().stream().map(model::toModel).collect(Collectors.toList());
         return CollectionModel.of(pedidos, linkTo(methodOn(PedidoController.class).findAll()).withSelfRel());
     }
 
     @GetMapping("/pedido/{idPedido}")
-    EntityModel<Pedido> findOne(@PathVariable Integer idPedido){
+    public EntityModel<Pedido> findOne(@PathVariable Integer idPedido){
         Pedido order = pedService.findOne(idPedido);
         return model.toModel(order);
     }
 
 
     @PutMapping("/{idPedido}/{idProducto}")
-    ResponseEntity<?> addProduct(@PathVariable Integer idProducto, @PathVariable Integer idPedido){
+    public ResponseEntity<?> addProduct(@PathVariable Integer idProducto, @PathVariable Integer idPedido){
         Pedido order = pedService.findOne(idPedido);
         Producto product = proService.findProduct(idProducto);
         pedService.addList(order, product);
@@ -63,7 +63,7 @@ public class PedidoController {
     }
 
     @PutMapping("/borar/{idPedido}/{idProducto}")
-    ResponseEntity<?> deleteElemetList(@PathVariable Integer idProducto, @PathVariable Integer idPedido){
+    public ResponseEntity<?> deleteElemetList(@PathVariable Integer idProducto, @PathVariable Integer idPedido){
         Pedido order = pedService.findOne(idPedido);
         Producto product = proService.findProduct(idProducto);
         pedService.subPrice(order, product);
@@ -73,7 +73,7 @@ public class PedidoController {
     }
 
     @PutMapping("/devuelto/{idOrden}")
-    ResponseEntity<?> returned(@PathVariable Integer idOrden){
+    public ResponseEntity<?> returned(@PathVariable Integer idOrden){
         Pedido order = pedService.findOne(idOrden);
         if(order.getStatusOrder() == StatusOrder.IN_TRANSIT | order.getStatusOrder() == StatusOrder.DELIVERED){
             pedService.upStatus(order, StatusOrder.RETURNED);
@@ -84,7 +84,7 @@ public class PedidoController {
     }
 
     @PutMapping("/entregado/{idOrden}")
-    ResponseEntity<?> delivered(@PathVariable Integer idOrden){
+    public ResponseEntity<?> delivered(@PathVariable Integer idOrden){
         Pedido order = pedService.findOne(idOrden);
         if(order.getStatusOrder() == StatusOrder.IN_TRANSIT){
             pedService.upStatus(order, StatusOrder.DELIVERED);
@@ -95,7 +95,7 @@ public class PedidoController {
     }
 
     @PutMapping("/enTransito/{idOrden}")
-    ResponseEntity<?> transit(@PathVariable Integer idOrden){
+    public ResponseEntity<?> transit(@PathVariable Integer idOrden){
         Pedido order = pedService.findOne(idOrden);
         if(order.getStatusOrder() == StatusOrder.PENDING){
             pedService.upStatus(order, StatusOrder.IN_TRANSIT);
@@ -106,7 +106,7 @@ public class PedidoController {
     }
 
     @DeleteMapping("/cancelar/{idOrden}")
-    ResponseEntity<?> canceled(@PathVariable Integer idOrden){
+    public ResponseEntity<?> canceled(@PathVariable Integer idOrden){
         Pedido order = pedService.findOne(idOrden);
         if(order.getStatusOrder() == StatusOrder.IN_TRANSIT | order.getStatusOrder() == StatusOrder.PENDING){
             pedService.upStatus(order, StatusOrder.CANCELED);
@@ -117,7 +117,7 @@ public class PedidoController {
     }
 
     @DeleteMapping("/borar/{idOrden}")
-    ResponseEntity<?> deleteOrder(@PathVariable Integer idOrden){
+    public ResponseEntity<?> deleteOrder(@PathVariable Integer idOrden){
         pedService.delete(idOrden);
         return ResponseEntity.noContent().build();
     }
