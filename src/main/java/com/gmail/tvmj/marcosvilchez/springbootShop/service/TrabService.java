@@ -35,7 +35,7 @@ public class TrabService {
             trabajador.setFirstname(workerOld.getFirstname());
             trabajador.setLastname(workerOld.getLastname());
             trabajador.setDepartment(workerOld.getDepartment());
-            trabajador.setUserMail(workerOld.getUserMail());
+            trabajador.setUsername(workerOld.getUsername());
             trabajador.setPassword(workerOld.getPassword());
             trabajador.setRol(workerOld.getRol());
             return repo.save(trabajador);

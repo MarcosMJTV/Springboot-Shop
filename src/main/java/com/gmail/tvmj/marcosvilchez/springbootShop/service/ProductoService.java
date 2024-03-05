@@ -1,6 +1,6 @@
 package com.gmail.tvmj.marcosvilchez.springbootShop.service;
 
-import com.gmail.tvmj.marcosvilchez.springbootShop.controller.StatusProduct;
+import com.gmail.tvmj.marcosvilchez.springbootShop.util.StatusProduct;
 import com.gmail.tvmj.marcosvilchez.springbootShop.model.Producto;
 import com.gmail.tvmj.marcosvilchez.springbootShop.reporitory.ProductoRepo;
 import lombok.AllArgsConstructor;

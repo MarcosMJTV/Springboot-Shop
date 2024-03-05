@@ -1,4 +1,4 @@
-package com.gmail.tvmj.marcosvilchez.springbootShop.controller;
+package com.gmail.tvmj.marcosvilchez.springbootShop.util;
 
 public enum StatusProduct {
     AVAILABLE,

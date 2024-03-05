@@ -1,6 +1,6 @@
 package com.gmail.tvmj.marcosvilchez.springbootShop.model;
 
-import com.gmail.tvmj.marcosvilchez.springbootShop.controller.StatusProduct;
+import com.gmail.tvmj.marcosvilchez.springbootShop.util.StatusProduct;
 import jakarta.persistence.*;
 import lombok.*;
 

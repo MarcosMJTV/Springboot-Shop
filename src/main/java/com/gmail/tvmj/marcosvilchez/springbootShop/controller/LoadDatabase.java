@@ -1,27 +1,36 @@
 package com.gmail.tvmj.marcosvilchez.springbootShop.controller;
 
+import com.gmail.tvmj.marcosvilchez.springbootShop.config.SecurityBeansInjector;
 import com.gmail.tvmj.marcosvilchez.springbootShop.model.Cliente;
 import com.gmail.tvmj.marcosvilchez.springbootShop.model.Pedido;
 import com.gmail.tvmj.marcosvilchez.springbootShop.model.Producto;
+import com.gmail.tvmj.marcosvilchez.springbootShop.model.User;
 import com.gmail.tvmj.marcosvilchez.springbootShop.service.ClienteService;
 import com.gmail.tvmj.marcosvilchez.springbootShop.service.PedidoService;
 import com.gmail.tvmj.marcosvilchez.springbootShop.service.ProductoService;
+import com.gmail.tvmj.marcosvilchez.springbootShop.service.UserService;
+import com.gmail.tvmj.marcosvilchez.springbootShop.util.Role;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 
 @Configuration
 public class LoadDatabase {
 
     private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
+    @Autowired
+    private PasswordEncoder encoder;
 
     @Bean
-    CommandLineRunner initDatabase(ClienteService repoCli, ProductoService repoPro, PedidoService repoPed){
+    CommandLineRunner initDatabase(ClienteService repoCli, ProductoService repoPro, PedidoService repoPed,
+                                   UserService uService){
         return args ->{
-
+/*
             Cliente cliente1= new Cliente("marcos","vilchez", "argentina", "Marcosvilchez.tvmj@gmail.com", "2004");
             Cliente cliente2= new Cliente("Alex","Johnson", "Estados Unidos", "alex.johnson@email.com", "Pass123");
             Cliente cliente3= new Cliente("Maria","Rodriguez", "México", "maria.rodriguez@email.com", "SecurePass456");
@@ -71,6 +80,9 @@ public class LoadDatabase {
             repoPed.saveOrder(pedido5);
             repoPed.saveOrder(pedido1);
 
+            uService.saveUser(new User("Marcos", "Vilchez", "Marcos@Gmail.com",
+                    encoder.encode("2004").toString(), Role.ADMIN));
+*/
         };
     }
 }

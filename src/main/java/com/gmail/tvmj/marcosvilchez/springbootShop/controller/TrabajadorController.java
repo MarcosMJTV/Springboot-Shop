@@ -1,6 +1,6 @@
 package com.gmail.tvmj.marcosvilchez.springbootShop.controller;
 
-import com.gmail.tvmj.marcosvilchez.springbootShop.model.Cliente;
+import com.gmail.tvmj.marcosvilchez.springbootShop.assemble.TrabajadorAssemble;
 import com.gmail.tvmj.marcosvilchez.springbootShop.model.Trabajador;
 import com.gmail.tvmj.marcosvilchez.springbootShop.service.TrabService;
 import lombok.AllArgsConstructor;

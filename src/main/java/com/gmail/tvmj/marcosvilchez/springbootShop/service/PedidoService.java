@@ -1,6 +1,6 @@
 package com.gmail.tvmj.marcosvilchez.springbootShop.service;
 
-import com.gmail.tvmj.marcosvilchez.springbootShop.controller.StatusOrder;
+import com.gmail.tvmj.marcosvilchez.springbootShop.util.StatusOrder;
 import com.gmail.tvmj.marcosvilchez.springbootShop.model.Pedido;
 import com.gmail.tvmj.marcosvilchez.springbootShop.model.Producto;
 import com.gmail.tvmj.marcosvilchez.springbootShop.reporitory.PedidoRepo;

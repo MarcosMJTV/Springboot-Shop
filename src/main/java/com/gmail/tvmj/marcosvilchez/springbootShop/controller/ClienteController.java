@@ -1,5 +1,6 @@
 package com.gmail.tvmj.marcosvilchez.springbootShop.controller;
 
+import com.gmail.tvmj.marcosvilchez.springbootShop.assemble.ClienteAssemble;
 import com.gmail.tvmj.marcosvilchez.springbootShop.model.Cliente;
 import com.gmail.tvmj.marcosvilchez.springbootShop.service.ClienteService;
 import lombok.AllArgsConstructor;
@@ -53,4 +54,8 @@ public class ClienteController {
         return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
     }
 
+    @PostMapping("/test")
+    public String welcome(){
+        return "funciona esta verga";
+    }
 }

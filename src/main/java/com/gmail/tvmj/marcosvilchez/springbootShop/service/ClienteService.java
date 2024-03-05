@@ -34,7 +34,7 @@ public class ClienteService {
             cliente.setFirstname(clientOld.getFirstname());
             cliente.setLastname(clientOld.getLastname());
             cliente.setCountry(clientOld.getCountry());
-            cliente.setUserMail(clientOld.getUserMail());
+            cliente.setUsername(clientOld.getUsername());
             cliente.setPassword(clientOld.getPassword());
             return repo.save(cliente);
         }).orElseGet(() -> {

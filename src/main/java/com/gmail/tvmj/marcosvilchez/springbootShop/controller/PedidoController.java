@@ -1,9 +1,11 @@
 package com.gmail.tvmj.marcosvilchez.springbootShop.controller;
 
+import com.gmail.tvmj.marcosvilchez.springbootShop.assemble.PedidoAssemble;
 import com.gmail.tvmj.marcosvilchez.springbootShop.model.Pedido;
 import com.gmail.tvmj.marcosvilchez.springbootShop.model.Producto;
 import com.gmail.tvmj.marcosvilchez.springbootShop.service.PedidoService;
 import com.gmail.tvmj.marcosvilchez.springbootShop.service.ProductoService;
+import com.gmail.tvmj.marcosvilchez.springbootShop.util.StatusOrder;
 import lombok.AllArgsConstructor;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
