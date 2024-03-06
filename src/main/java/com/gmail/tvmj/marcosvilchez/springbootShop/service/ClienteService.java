@@ -7,15 +7,16 @@ import com.gmail.tvmj.marcosvilchez.springbootShop.reporitory.ClienteRepo;
 import com.gmail.tvmj.marcosvilchez.springbootShop.reporitory.UserRepo;
 import com.gmail.tvmj.marcosvilchez.springbootShop.util.Role;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class ClienteService {
-    private final ClienteRepo repo;
-    private final UserRepo uRepo;
+    @Autowired private final ClienteRepo repo;
 
     public Cliente saveClient(Cliente client){
         return repo.save(client);
@@ -47,4 +48,5 @@ public class ClienteService {
         });
         return client;
     }
+
 }

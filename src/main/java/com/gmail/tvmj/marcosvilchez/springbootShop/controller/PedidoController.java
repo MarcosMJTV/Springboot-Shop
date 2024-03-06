@@ -15,6 +15,7 @@ import org.springframework.hateoas.mediatype.problem.Problem;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,26 +33,28 @@ public class PedidoController {
     private PedidoService pedService;
     private PedidoAssemble model;
 
-
+    @PreAuthorize("PermitAll")
     @PostMapping("/pedido")
     public ResponseEntity<?> newOrder(@RequestBody Pedido order){
         EntityModel<Pedido> neworder = model.toModel(pedService.saveOrder(order));
         return ResponseEntity.created(neworder.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(neworder);
     }
 
+    @PreAuthorize("permitAll")
     @GetMapping("/pedido")
     public CollectionModel<EntityModel<Pedido>> findAll(){
         List<EntityModel<Pedido>> pedidos = pedService.findAll().stream().map(model::toModel).collect(Collectors.toList());
         return CollectionModel.of(pedidos, linkTo(methodOn(PedidoController.class).findAll()).withSelfRel());
     }
 
+    @PreAuthorize("permitAll")
     @GetMapping("/pedido/{idPedido}")
     public EntityModel<Pedido> findOne(@PathVariable Integer idPedido){
         Pedido order = pedService.findOne(idPedido);
         return model.toModel(order);
     }
 
-
+    @PreAuthorize("permitAll")
     @PutMapping("/{idPedido}/{idProducto}")
     public ResponseEntity<?> addProduct(@PathVariable Integer idProducto, @PathVariable Integer idPedido){
         Pedido order = pedService.findOne(idPedido);
@@ -62,6 +65,7 @@ public class PedidoController {
         return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
     }
 
+    @PreAuthorize("permitAll")
     @PutMapping("/borar/{idPedido}/{idProducto}")
     public ResponseEntity<?> deleteElemetList(@PathVariable Integer idProducto, @PathVariable Integer idPedido){
         Pedido order = pedService.findOne(idPedido);
@@ -72,6 +76,7 @@ public class PedidoController {
         return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
     }
 
+    @PreAuthorize("hasAuthority('USER_LEVEL3')")
     @PutMapping("/devuelto/{idOrden}")
     public ResponseEntity<?> returned(@PathVariable Integer idOrden){
         Pedido order = pedService.findOne(idOrden);
@@ -79,10 +84,13 @@ public class PedidoController {
             pedService.upStatus(order, StatusOrder.RETURNED);
             return ResponseEntity.ok(model.toModel(order));
         }
-        return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE).body(
-                Problem.create().withTitle("Método no permitido").withDetail("No puedes cambiar el estado a un pedido que no esté en pendiente"));
+        return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).header(HttpHeaders.CONTENT_TYPE, MediaTypes.
+                HTTP_PROBLEM_DETAILS_JSON_VALUE).body(
+                Problem.create().withTitle("Método no permitido").withDetail("No puedes cambiar el estado a " +
+                        "un pedido que no esté en pendiente"));
     }
 
+    @PreAuthorize("hasAuthority('USER_LEVEL3')")
     @PutMapping("/entregado/{idOrden}")
     public ResponseEntity<?> delivered(@PathVariable Integer idOrden){
         Pedido order = pedService.findOne(idOrden);
@@ -90,10 +98,13 @@ public class PedidoController {
             pedService.upStatus(order, StatusOrder.DELIVERED);
             return ResponseEntity.ok(model.toModel(order));
         }
-        return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE).body(
-                Problem.create().withTitle("Método no permitido").withDetail("No puedes cambiar el estado a un pedido que no esté en pendiente"));
+        return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).header(HttpHeaders.CONTENT_TYPE,
+                MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE).body(
+                Problem.create().withTitle("Método no permitido").withDetail("No puedes cambiar el estado " +
+                        "a un pedido que no esté en pendiente"));
     }
 
+    @PreAuthorize("hasAuthority('USER_LEVEL3')")
     @PutMapping("/enTransito/{idOrden}")
     public ResponseEntity<?> transit(@PathVariable Integer idOrden){
         Pedido order = pedService.findOne(idOrden);
@@ -101,10 +112,13 @@ public class PedidoController {
             pedService.upStatus(order, StatusOrder.IN_TRANSIT);
             return ResponseEntity.ok(model.toModel(order));
         }
-        return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE).body(
-                Problem.create().withTitle("Método no permitido").withDetail("No puedes cambiar el estado a un pedido que no esté en pendiente"));
+        return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).header(HttpHeaders.CONTENT_TYPE,
+                MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE).body(
+                Problem.create().withTitle("Método no permitido").withDetail("No puedes cambiar el estado " +
+                        "a un pedido que no esté en pendiente"));
     }
 
+    @PreAuthorize("hasAuthority('USER_LEVEL3')")
     @DeleteMapping("/cancelar/{idOrden}")
     public ResponseEntity<?> canceled(@PathVariable Integer idOrden){
         Pedido order = pedService.findOne(idOrden);
@@ -112,10 +126,13 @@ public class PedidoController {
             pedService.upStatus(order, StatusOrder.CANCELED);
             return ResponseEntity.ok(model.toModel(order));
         }
-        return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE).body(
-                Problem.create().withTitle("Método no permitido").withDetail("No puedes cancelar un pedido que esté en el estado de: " + order.getStatusOrder()));
+        return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).header(HttpHeaders.CONTENT_TYPE,
+                MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE).body(
+                Problem.create().withTitle("Método no permitido").withDetail("No puedes cancelar un pedido que " +
+                        "esté en el estado de: " + order.getStatusOrder()));
     }
 
+    @PreAuthorize("hasAuthority('USER_ADMIN')")
     @DeleteMapping("/borar/{idOrden}")
     public ResponseEntity<?> deleteOrder(@PathVariable Integer idOrden){
         pedService.delete(idOrden);

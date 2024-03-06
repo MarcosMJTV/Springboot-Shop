@@ -10,18 +10,15 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class TrabService {
 
     private TrabajadorRepo repo;
-    private UserRepo uRepo;
 
     public Trabajador saveWorker (Trabajador worker){
-        /*User user = new User(worker.getFirstname(), worker.getLastname(), worker.getUsername(), worker.getPassword(),
-                worker.getRol());
-        uRepo.save(user);*/
         return repo.save(worker);
     }
 
@@ -53,5 +50,23 @@ public class TrabService {
         return worker;
     }
 
+    public Trabajador updateRol(Trabajador worker, int rol){
+         worker.setRol(designateRole(rol));
+         return worker;
+    }
+
+    public Trabajador findByUsername(String username){
+        return repo.findByUsername(username);
+    }
+
+    public Role designateRole(int rol){
+        if(rol == 1){
+            return Role.INVENTORY;
+        } else if (rol == 2) {
+            return Role.TASK_COORDINATOR;
+        }else{
+            return Role.ADMIN;
+        }
+    }
 
 }

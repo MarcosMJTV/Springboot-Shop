@@ -18,6 +18,7 @@ import java.util.List;
 public class Cliente extends  User{
     private String country;
 
+
     public Cliente(String firstname,String lastname,String country, String username, String password){
         super(firstname, lastname,username, password);
         this.country = country;
@@ -28,34 +29,4 @@ public class Cliente extends  User{
         this.country = country;
     }
 
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority((getRol().name())));
-    }
-
-    @Override
-    public String getUsername() {
-        return this.getUsername();
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
 }

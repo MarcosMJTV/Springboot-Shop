@@ -9,5 +9,4 @@ public interface UserRepo extends JpaRepository<User, Integer> {
 
     public Optional<User> findByUsername(String username);
 
-    public User save(User user);
 }
